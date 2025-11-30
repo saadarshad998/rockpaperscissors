@@ -38,7 +38,7 @@ function playRound(user, cpu) {
 let playerScore = 0;
 let computerScore = 0;
 
-for (i = 1; i <= 5; i++) {
+for (let i = 1; i <= 5; i++) {
 let playersChoice = getHumanChoice();
 let compsChoice = getComputerChoice();
 alert(playRound(playersChoice, compsChoice) + "");
