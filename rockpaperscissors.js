@@ -7,12 +7,6 @@ const getComputerChoice = function() {
   }
 }
 
-function getHumanChoice() {
-const userChoice = String(window.prompt("Choose either rock, paper, or scissors.", ""));
-return userChoice;
-
-}
-
 function playRound(user, cpu) {
   const rules = {
     rock: "scissors",
@@ -21,7 +15,7 @@ function playRound(user, cpu) {
   };
 
   if (user === cpu) {
-    return "Nobody won. You both chose " + user;
+    return "Nobody won. You both chose " + user + ". Round will restart.";
   }
 
   if (rules[user] === cpu) {
@@ -29,20 +23,57 @@ function playRound(user, cpu) {
     return "Player won. You chose " + user + " and they chose " + cpu;
   }
 
-  
   computerScore += 1;
   return "Computer won. They chose " + cpu + " and you chose " + user;
 }
 
+function checkWinner() {
+  if (playerScore > computerScore) {
+    document.querySelector(".playerscore").style.fontWeight = "bold";
+    return "You won!";
+  }
+
+  if (computerScore > playerScore) {
+    document.querySelector(".cpuscore").style.fontWeight = "bold";
+    return "You lost!";
+  }
+
+  return "It's a tie!";
+}
+
+
 
 let playerScore = 0;
 let computerScore = 0;
+let roundsPlayed = 0;
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
 
-for (let i = 1; i <= 5; i++) {
-let playersChoice = getHumanChoice();
-let compsChoice = getComputerChoice();
-alert(playRound(playersChoice, compsChoice) + "");
-alert("Current score, Round " + i + "\n PLAYER: " + playerScore + "\n CPU: " + computerScore);
-};
+    if (roundsPlayed >= 5) {
+      document.getElementById("result").textContent = checkWinner();
+      return;
+    }
 
-alert("Final score\n PLAYER: " + playerScore + "\n CPU: " + computerScore);
+    const userChoice = button.textContent.toLowerCase();
+    const cpuChoice = getComputerChoice();
+    const result = playRound(userChoice, cpuChoice);
+
+    if (!result.startsWith("Nobody won")) {
+      roundsPlayed += 1;
+    }
+
+    if (roundsPlayed >= 5) {
+      document.getElementById("result").textContent = checkWinner();
+    } else {
+      document.getElementById("result").textContent = result;
+    }
+
+    document.querySelector(".playerscore").textContent =
+      "Player score: " + playerScore;
+    document.querySelector(".cpuscore").textContent =
+      "CPU score: " + computerScore;
+    document.querySelector(".roundsplayed").textContent =
+      "Rounds played: " + roundsPlayed;
+  });
+});

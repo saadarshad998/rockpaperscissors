@@ -1,0 +1,52 @@
+/* DEFAULT PAGE LAYOUT */
+body {
+  height: 100vh;
+  margin: 0;
+  display: block;
+}
+
+/* TITLE */
+.helptext {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+/* NEW: buttons and result message stacked together */
+.game-container {
+  display: flex;
+  flex-direction: column;  /* vertical stack */
+  align-items: center;     /* center horizontally */
+  margin-top: 40px;        /* space below the title */
+}
+
+/* BUTTON GROUP */
+.buttongrp {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* RESULT TEXT tight under buttons */
+.resultDiv {
+  margin-top: 10px;        /* small gap */
+  text-align: center;
+}
+
+/* ORIGINAL BUTTON COLORS */
+#rockbtn { background-color: red; color: white; }
+#paperbtn { background-color: blue; color: white; }
+#scissorbtn { background-color: green; color: white; }
+
+button {
+  border-radius: 8px;
+  font-size: 20px;
+}
+
+/* SCORES — bottom-left */
+.scores {
+  bottom: 20px;
+  left: 20px;
+  font-size: 18px;
+}
